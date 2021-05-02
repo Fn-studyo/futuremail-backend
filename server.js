@@ -32,7 +32,7 @@ transporter.verify((err, success) => {
 })
   
 
-app.get('/', (req, res) => res.send('Api Is Working!'))
+app.get('/', (req, res) => res.sendFile(__dirname +'/public/index.html'))
 
 app.post('/reminder', function (req, res) {
 
