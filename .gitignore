@@ -5,3 +5,8 @@
 # Config File
 
 .env
+
+# Others
+
+.gitattributes
+yarn.lock

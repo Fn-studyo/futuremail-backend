@@ -4,7 +4,7 @@
   "description": "backend for futuremail",
   "main": "server.js",
   "author": "Temitope Adebayo",
-  "license": "ISC",
+  "license": "MIT",
   "scripts": {
     "dev": "nodemon server.js"
   },
