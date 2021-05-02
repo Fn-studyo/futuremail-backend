@@ -30,6 +30,9 @@ transporter.verify((err, success) => {
         return console.log(success)
     }
 })
+  
+
+app.get('/', (req, res) => res.send('Api Is Working!'))
 
 app.post('/reminder', function (req, res) {
 
@@ -154,8 +157,5 @@ app.post('/task', function (req, res) {
         }
     })
 })
-  
-
-app.get('/', (req, res) => res.send('Api Is Working!'))
 
 app.listen(port, () => console.log(`App Working on port https://localhost:${port}`))
