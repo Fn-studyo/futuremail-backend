@@ -1,10 +1,11 @@
 const express = require('express')
 const nodemailer = require('nodemailer')
-var schedule = require('node-schedule')
+const schedule = require('node-schedule')
+const ejs = require('ejs')
 const app = express()
 const cors = require("cors")
 require("dotenv").config()
-const port = 3000
+const port = 9000
 
 app.use(express.json());
 app.use(cors());
@@ -30,29 +31,127 @@ transporter.verify((err, success) => {
     }
 })
 
-app.post('/send', function (req, res) {
+app.post('/reminder', function (req, res) {
 
-    const mailOptions = {
-        from: process.env.EMAIL,
-        to: `${req.body.email}`,
-        subject: `${req.body.subject}`,
-        text: `${req.body.message}`
-    }
+    let context = {
+        receiver_name : `${req.receiver_name}`,
+        message: `${req.message}`,
+        sender_name: `${req.sender_name}`
+    };
 
-    schedule.scheduleJob(new Date(`${year}, ${month}, ${day}, ${hour}, ${mins}, 0`), function () {
+    ejs.renderFile(process.cwd() + '/templates/temp-three.ejs', context, (err, info) => {
 
-        transporter.sendMail(mailOptions, function(err, info){
-            if (err) {
-                res.json({
-                    status: 'Server Error/No Internet Connection'
+        const mailOptions = {
+            from: {
+                name: 'FutureMail',
+                address: process.env.EMAIL
+            },
+            to: `${req.body.email}`,
+            subject: `${req.body.subject}`,
+            html: info
+        }
+
+        if (err) {
+          console.log(err)
+        } else{
+            schedule.scheduleJob(new Date(`${req.year}, ${req.month}, ${req.day}, ${req.hour}, ${req.mins}, 0`), function () {
+
+                transporter.sendMail(mailOptions, function(err, info){
+                    if (err) {
+                        res.json({
+                            status: 'Server Error/No Internet Connection'
+                        })
+                    } else {
+                        res.json({
+                            status: "Your Email Has Been Sent!"
+                        })
+                    }
                 })
-            } else {
-                res.json({
-                    status: "Your Email Has Been Sent!"
-                })
-            }
-        })
+            })
+        }
+    })
+})
 
+app.post('/future', function (req, res) {
+
+    let context = {
+        receiver_name : `${req.receiver_name}`,
+        message: `${req.message}`,
+        sender_name: `${req.sender_name}`
+    };
+
+    ejs.renderFile(process.cwd() + '/templates/temp-one.ejs', context, (err, info) => {
+
+        const mailOptions = {
+            from: {
+                name: 'FutureMail',
+                address: process.env.EMAIL
+            },
+            to: `${req.body.email}`,
+            subject: `${req.body.subject}`,
+            html: info
+        }
+
+        if (err) {
+          console.log(err)
+        } else{
+            schedule.scheduleJob(new Date(`${req.year}, ${req.month}, ${req.day}, ${req.hour}, ${req.mins}, 0`), function () {
+
+                transporter.sendMail(mailOptions, function(err, info){
+                    if (err) {
+                        res.json({
+                            status: 'Server Error/No Internet Connection'
+                        })
+                    } else {
+                        res.json({
+                            status: "Your Email Has Been Sent!"
+                        })
+                    }
+                })
+            })
+        }
+    })
+})
+
+app.post('/task', function (req, res) {
+
+    let context = {
+        receiver_name : `${req.receiver_name}`,
+        task: `${req.task}`,
+        message: `${req.message}`,
+        sender_name: `${req.sender_name}`
+    };
+
+    ejs.renderFile(process.cwd() + '/templates/temp-two.ejs', context, (err, info) => {
+
+        const mailOptions = {
+            from: {
+                name: 'FutureMail',
+                address: process.env.EMAIL
+            },
+            to: `${req.body.email}`,
+            subject: `${req.body.subject}`,
+            html: info
+        }
+
+        if (err) {
+          console.log(err)
+        } else{
+            schedule.scheduleJob(new Date(`${req.year}, ${req.month}, ${req.day}, ${req.hour}, ${req.mins}, 0`), function () {
+
+                transporter.sendMail(mailOptions, function(err, info){
+                    if (err) {
+                        res.json({
+                            status: 'Server Error/No Internet Connection'
+                        })
+                    } else {
+                        res.json({
+                            status: "Your Email Has Been Sent!"
+                        })
+                    }
+                })
+            })
+        }
     })
 })
   
