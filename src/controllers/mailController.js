@@ -42,7 +42,7 @@ exports.reminder = (req, res) => {
         sender_name: `${req.body.sender_name}`
     };
 
-    ejs.renderFile(process.cwd() + '/templates/temp-three.ejs', context, (err, info) => {
+    ejs.renderFile(process.cwd() + '/src/templates/temp-three.ejs', context, (err, info) => {
 
         const mailOptions = {
             from: {
@@ -83,7 +83,7 @@ exports.future = (req, res) => {
         sender_name: `${req.body.sender_name}`
     };
 
-    ejs.renderFile(process.cwd() + '/templates/temp-one.ejs', context, (err, info) => {
+    ejs.renderFile(process.cwd() + '/src/templates/temp-one.ejs', context, (err, info) => {
 
         const mailOptions = {
             from: {
@@ -125,7 +125,7 @@ exports.task = (req, res) => {
         sender_name: `${req.body.sender_name}`
     };
 
-    ejs.renderFile(process.cwd() + '/templates/temp-two.ejs', context, (err, info) => {
+    ejs.renderFile(process.cwd() + '/src/templates/temp-two.ejs', context, (err, info) => {
 
         const mailOptions = {
             from: {
