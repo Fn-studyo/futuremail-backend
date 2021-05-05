@@ -45,10 +45,7 @@ exports.reminder = (req, res) => {
     ejs.renderFile(process.cwd() + '/src/templates/temp-three.ejs', context, (err, info) => {
 
         const mailOptions = {
-            from: {
-                name: 'FutureMail',
-                address: process.env.EMAIL
-            },
+            from: process.env.EMAIL,
             to: `${req.body.email}`,
             subject: `${req.body.subject}`,
             html: info
