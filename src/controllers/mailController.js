@@ -58,9 +58,10 @@ exports.reminder = (req, res) => {
 
                 transporter.sendMail(mailOptions, function(err, info){
                     if (err) {
-                        return res.json({
-                            status: 'Server Error/No Internet Connection'
-                        })
+                        return console.log(err)
+                        // return res.json({
+                        //     status: 'Server Error/No Internet Connection'
+                        // })
                     } else {
                         return res.json({
                             status: "Your Email Has Been Sent!"
