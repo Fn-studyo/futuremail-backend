@@ -5,24 +5,24 @@ require("dotenv").config()
 
 const transporter = nodemailer.createTransport({
     service: "gmail",
-    port: process.env.EMAIL_PORT,
-    secure: true, //ssl
-    auth: {
-        user: process.env.EMAIL,
-        pass: process.env.PASSWORD,
-    },
-    
-    tls: {
-        rejectUnauthorized: false
-    }
+    // port: process.env.EMAIL_PORT,
+    // secure: true, //ssl
     // auth: {
-    //   type: "OAuth2",
-    //   user: process.env.EMAIL,
-    //   pass: process.env.PASSWORD,
-    //   clientId: process.env.OAUTH_CLIENTID,
-    //   clientSecret: process.env.OAUTH_CLIENT_SECRET,
-    //   refreshToken: process.env.OAUTH_REFRESH_TOKEN,
+    //     user: process.env.EMAIL,
+    //     pass: process.env.PASSWORD,
     // },
+    
+    // tls: {
+    //     rejectUnauthorized: false
+    // }
+    auth: {
+      type: "OAuth2",
+      user: process.env.EMAIL,
+      pass: process.env.PASSWORD,
+      clientId: process.env.OAUTH_CLIENTID,
+      clientSecret: process.env.OAUTH_CLIENT_SECRET,
+      refreshToken: process.env.OAUTH_REFRESH_TOKEN,
+    },
 })
 
 transporter.verify((err, success) => {
